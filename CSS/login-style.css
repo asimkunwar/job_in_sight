@@ -1,0 +1,265 @@
+/* --- RESET & GLOBAL AUTH STYLES --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --primary: #0284c7;
+    --primary-dark: #0369a1;
+    --primary-light: #e0f2fe;
+    --text-dark: #1e293b;
+    --text-muted: #64748b;
+    --bg-gradient: linear-gradient(135deg, #e0f2fe 0%, #f8fafc 100%);
+    --white: #ffffff;
+    --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    --transition: all 0.25s ease;
+    --error: #ef4444;
+}
+
+body {
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-dark);
+}
+
+/* --- BACK HOME BUTTON --- */
+.back-home {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+    font-size: 0.95rem;
+}
+
+.back-home:hover {
+    color: var(--primary);
+    transform: translateX(-3px);
+}
+
+/* --- MAIN CENTERED LOGIN LAYOUT --- */
+.login-wrapper {
+    width: 100%;
+    max-width: 450px;
+    padding: 1.5rem;
+}
+
+.login-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 2.5rem 2.25rem;
+    box-shadow: var(--shadow-card);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.login-header .logo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.login-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 0.35rem;
+}
+
+.login-header p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* --- FORM ELEMENTS --- */
+.input-group {
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+}
+
+.input-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-field i {
+    position: absolute;
+    left: 1rem;
+    color: var(--text-muted);
+    transition: var(--transition);
+}
+
+.input-field input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: var(--transition);
+    color: var(--text-dark);
+}
+
+/* Focus States */
+.input-field input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.1);
+}
+
+.input-field input:focus + i, 
+.input-field input:not(:placeholder-shown) + i {
+    color: var(--primary);
+}
+
+/* Error UI Modifiers */
+.input-field.invalid input {
+    border-color: var(--error);
+    background-color: #fff5f5;
+}
+
+.input-field.invalid i {
+    color: var(--error);
+}
+
+.error-msg {
+    color: var(--error);
+    font-size: 0.8rem;
+    margin-top: 0.35rem;
+    min-height: 1.2rem;
+}
+
+/* --- ACTION LINKS (REMEMBER ME / FORGOT PWD) --- */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    font-size: 0.85rem;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    user-select: none;
+    color: var(--text-muted);
+}
+
+.remember-me input {
+    cursor: pointer;
+    accent-color: var(--primary);
+    width: 15px;
+    height: 15px;
+}
+
+.forgot-pwd {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.forgot-pwd:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* --- SUBMIT BUTTON --- */
+.btn-login {
+    width: 100%;
+    background-color: var(--primary);
+    color: var(--white);
+    border: none;
+    padding: 0.85rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 4px 6px -1px rgba(2, 132, 199, 0.2);
+}
+
+.btn-login:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.btn-login:active {
+    transform: translateY(0);
+}
+
+/* --- CARD FOOTER REDIRECTS --- */
+.login-footer {
+    text-align: center;
+    margin-top: 2rem;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 1.25rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.login-footer a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.login-footer a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* Summary Validation block */
+.error-summary {
+    display: none;
+    background-color: #fef2f2;
+    border: 1px solid #fee2e2;
+    color: var(--error);
+    padding: 0.75rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 480px) {
+    .login-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .back-home {
+        top: 1rem;
+        left: 1rem;
+    }
+}

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | JobInsight</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="./css/register-style.css">
+</head>
+<body>
+
+    <!-- Back to Home Link -->
+    <a href="index.html" class="back-home">
+        <i class="fa-solid fa-arrow-left"></i> Back to Home
+    </a>
+
+    <!-- Main Container centered on screen -->
+    <div class="register-wrapper">
+        <div class="register-card">
+            
+            <!-- Branding Header -->
+            <div class="register-header">
+                <div class="logo">
+                    <i class="fa-solid fa-magnifying-glass-chart"></i> JobInsight
+                </div>
+                <h2>Create Account</h2>
+                <p>Join the data-driven trend mining network</p>
+            </div>
+
+            <!-- Form -->
+            <form id="registerForm" novalidate>
+
+                <!-- Full Name Field -->
+                <div class="input-group">
+                    <label for="fullName">Full Name</label>
+                    <div class="input-field">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="fullName" placeholder="John Doe" required>
+                    </div>
+                    <span class="error-msg" id="nameError"></span>
+                </div>
+
+                <!-- Email Input Field -->
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-field">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" id="email" placeholder="example@gmail.com" required>
+                    </div>
+                    <span class="error-msg" id="emailError"></span>
+                </div>
+
+                <!-- Phone Number Field -->
+                <div class="input-group">
+                    <label for="phone">Phone Number</label>
+                    <div class="input-field">
+                        <i class="fa-solid fa-phone"></i>
+                        <input type="text" id="phone" placeholder="10-digit mobile number" maxlength="10" required>
+                    </div>
+                    <span class="error-msg" id="phoneError"></span>
+                </div>
+
+                <!-- User Role Select Dropdown -->
+                <div class="input-group">
+                    <label for="userRole">User Role</label>
+                    <div class="input-field">
+                        <i class="fa-solid fa-briefcase text-icon"></i>
+                        <select id="userRole" required>
+                            <option value="" disabled selected>Select your account role</option>
+                            <option value="seeker">Job Seeker</option>
+                            <option value="recruiter">Recruiter</option>
+                        </select>
+                    </div>
+                    <span class="error-msg" id="roleError"></span>
+                </div>
+
+                <!-- Password Input Field -->
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <div class="input-field">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="password" placeholder="At least 6 characters" required>
+                    </div>
+                    <span class="error-msg" id="passwordError"></span>
+                </div>
+
+                <!-- Confirm Password Input Field -->
+                <div class="input-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <div class="input-field">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <input type="password" id="confirmPassword" placeholder="Re-enter your password" required>
+                    </div>
+                    <span class="error-msg" id="confirmPasswordError"></span>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn-register">Register</button>
+            </form>
+
+            <!-- Login Redirect Link -->
+            <div class="register-footer">
+                <p>Already have an account? <a href="login.html">Sign In</a></p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JavaScript Custom Validation Setup -->
+    <script>
+        // Real-time masking restriction: Prevent non-numeric key insertion in phone field
+        document.getElementById('phone').addEventListener('input', function (e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Form Fields
+            const fullName = document.getElementById('fullName');
+            const email = document.getElementById('email');
+            const phone = document.getElementById('phone');
+            const userRole = document.getElementById('userRole');
+            const password = document.getElementById('password');
+            const confirmPassword = document.getElementById('confirmPassword');
+
+            // Error Elements
+            const nameError = document.getElementById('nameError');
+            const emailError = document.getElementById('emailError');
+            const phoneError = document.getElementById('phoneError');
+            const roleError = document.getElementById('roleError');
+            const passwordError = document.getElementById('passwordError');
+            const confirmPasswordError = document.getElementById('confirmPasswordError');
+
+            let isValid = true;
+
+            // Clear former validation states
+            const inputs = [fullName, email, phone, userRole, password, confirmPassword];
+            const errorSpans = [nameError, emailError, phoneError, roleError, passwordError, confirmPasswordError];
+            
+            errorSpans.forEach(span => span.textContent = '');
+            inputs.forEach(input => input.parentElement.classList.remove('invalid'));
+
+            // 1. Full Name Validation
+            if (!fullName.value.trim()) {
+                nameError.textContent = 'Full name is required.';
+                fullName.parentElement.classList.add('invalid');
+                isValid = false;
+            }
+
+            // 2. Email Validation (@gmail.com mandatory)
+            const emailValue = email.value.trim();
+            if (!emailValue) {
+                emailError.textContent = 'Email address is required.';
+                email.parentElement.classList.add('invalid');
+                isValid = false;
+            } else if (!emailValue.endsWith('@gmail.com')) {
+                emailError.textContent = 'Registration requires a valid Gmail account ending in @gmail.com.';
+                email.parentElement.classList.add('invalid');
+                isValid = false;
+            }
+
+            // 3. Phone Number Validation (Exactly 10 clean digits)
+            const phoneValue = phone.value.trim();
+            if (!phoneValue) {
+                phoneError.textContent = 'Phone number is required.';
+                phone.parentElement.classList.add('invalid');
+                isValid = false;
+            } else if (phoneValue.length !== 10 || /[^0-9]/.test(phoneValue)) {
+                phoneError.textContent = 'Phone number must contain exactly 10 digits without text.';
+                phone.parentElement.classList.add('invalid');
+                isValid = false;
+            }
+
+            // 4. Role Selection Validation
+            if (!userRole.value) {
+                roleError.textContent = 'Please choose a profile track context.';
+                userRole.parentElement.classList.add('invalid');
+                isValid = false;
+            }
+
+            // 5. Password Verification Validation
+            if (!password.value) {
+                passwordError.textContent = 'Password configuration is mandatory.';
+                password.parentElement.classList.add('invalid');
+                isValid = false;
+            } else if (password.value.length < 6) {
+                passwordError.textContent = 'Password must be at least 6 characters.';
+                password.parentElement.classList.add('invalid');
+                isValid = false;
+            }
+
+            // 6. Password Match Validation
+            if (!confirmPassword.value) {
+                confirmPasswordError.textContent = 'Please re-enter your password selection.';
+                confirmPassword.parentElement.classList.add('invalid');
+                isValid = false;
+            } else if (password.value !== confirmPassword.value) {
+                confirmPasswordError.textContent = 'Mismatch detected. Passwords must mirror each other.';
+                confirmPassword.parentElement.classList.add('invalid');
+                isValid = false;
+            }
+
+            // Post action handling routing block
+            if (isValid) {
+                alert('Account generated successfully! Redirecting token profile setup to your core control deck.');
+            }
+        });
+    </script>
+</body>
+</html>
