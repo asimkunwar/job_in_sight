@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobInsight – Job Market Trend Mining System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./CSS/style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-magnifying-glass-chart"></i> JobInsight
+            </a>
+            
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+
+            <ul class="nav-menu" id="nav-links">
+                <li><a href="#" class="nav-link active">Home</a></li>
+                <li><a href="#jobs" class="nav-link">Jobs</a></li>
+                <li><a href="#trends" class="nav-link">Market Trends</a></li>
+                <li><a href="#skills" class="nav-link">Skills Analysis</a></li>
+                <li><a href="#companies" class="nav-link">Companies</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li class="nav-auth">
+                    <a href="#" class="btn-login">Login</a>
+                    <a href="#" class="btn-register">Register</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Mine the Data. <br>Discover Your <span>Future Job Market</span></h1>
+            <p>JobInsight runs advanced predictive algorithms over millions of job postings to bring you live data trends, high-paying career paths, and tailored recommendations.</p>
+            
+            <form class="search-container" onsubmit="event.preventDefault(); alert('Search capability triggered!');">
+                <div class="search-input-group">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Job title, keywords, or skills...">
+                </div>
+                <div class="search-input-group">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <input type="text" placeholder="City, state, or remote...">
+                </div>
+                <button type="submit" class="btn-search">Search</button>
+            </form>
+        </div>
+    </header>
+
+    <section class="container" id="skills">
+        <h2 class="section-title">Popular Job Sectors</h2>
+        <p class="section-subtitle">Explore high-demand tracks built on fresh data mining inputs</p>
+        
+        <div class="categories-grid">
+            <div class="category-card">
+                <i class="fa-solid fa-code"></i>
+                <h3>Software & Tech</h3>
+                <p>12,450+ Active Jobs</p>
+            </div>
+            <div class="category-card">
+                <i class="fa-solid fa-chart-line"></i>
+                <h3>Data & Analytics</h3>
+                <p>8,210+ Active Jobs</p>
+            </div>
+            <div class="category-card">
+                <i class="fa-solid fa-rectangle-ad"></i>
+                <h3>Digital Marketing</h3>
+                <p>5,110+ Active Jobs</p>
+            </div>
+            <div class="category-card">
+                <i class="fa-solid fa-user-doctor"></i>
+                <h3>Healthcare Tech</h3>
+                <p>6,840+ Active Jobs</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="trending-jobs" id="jobs">
+        <div class="container">
+            <h2 class="section-title">Trending Job Openings</h2>
+            <p class="section-subtitle">High-growth roles calculated via this week's data aggregation metrics</p>
+            
+            <div class="jobs-grid">
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-title-group">
+                            <h3>Senior Machine Learning Engineer</h3>
+                            <p class="job-company">Neural Systems Inc.</p>
+                        </div>
+                        <span class="trend-badge"><i class="fa-solid fa-arrow-trend-up"></i> +24% Demand</span>
+                    </div>
+                    <div class="job-details">
+                        <span><i class="fa-solid fa-location-dot"></i> San Francisco, CA (Hybrid)</span>
+                        <span><i class="fa-solid fa-briefcase"></i> Full-time</span>
+                    </div>
+                    <div class="job-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">PyTorch</span>
+                        <span class="tag">LLMs</span>
+                    </div>
+                    <div class="job-footer">
+                        <span class="job-salary">$160k - $210k</span>
+                        <button class="btn-apply">Apply Now</button>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-title-group">
+                            <h3>Full Stack Developer (React & Node)</h3>
+                            <p class="job-company">CloudScale Solutions</p>
+                        </div>
+                        <span class="trend-badge"><i class="fa-solid fa-arrow-trend-up"></i> +18% Demand</span>
+                    </div>
+                    <div class="job-details">
+                        <span><i class="fa-solid fa-location-dot"></i> Remote (US)</span>
+                        <span><i class="fa-solid fa-briefcase"></i> Full-time</span>
+                    </div>
+                    <div class="job-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">AWS</span>
+                    </div>
+                    <div class="job-footer">
+                        <span class="job-salary">$120k - $155k</span>
+                        <button class="btn-apply">Apply Now</button>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-title-group">
+                            <h3>Senior Data Privacy Architect</h3>
+                            <p class="job-company">FinSec Global</p>
+                        </div>
+                        <span class="trend-badge"><i class="fa-solid fa-arrow-trend-up"></i> +15% Demand</span>
+                    </div>
+                    <div class="job-details">
+                        <span><i class="fa-solid fa-location-dot"></i> New York, NY</span>
+                        <span><i class="fa-solid fa-briefcase"></i> Full-time</span>
+                    </div>
+                    <div class="job-tags">
+                        <span class="tag">Cybersecurity</span>
+                        <span class="tag">GDPR</span>
+                        <span class="tag">Governance</span>
+                    </div>
+                    <div class="job-footer">
+                        <span class="job-salary">$145k - $190k</span>
+                        <button class="btn-apply">Apply Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container" id="companies">
+        <h2 class="section-title">Top Hiring Enterprises</h2>
+        <p class="section-subtitle">Companies expanding talent pipelines based on hiring volumes</p>
+        
+        <div class="companies-slider">
+            <div class="company-card">
+                <div class="company-logo-box"><i class="fa-solid fa-building-shield"></i></div>
+                <h4>Apex Corp</h4>
+                <p>Financial Technology</p>
+                <span class="opp-count">42 Open Roles</span>
+            </div>
+            <div class="company-card">
+                <div class="company-logo-box"><i class="fa-solid fa-cloud"></i></div>
+                <h4>Stellar Web</h4>
+                <p>Cloud Infrastructure</p>
+                <span class="opp-count">29 Open Roles</span>
+            </div>
+            <div class="company-card">
+                <div class="company-logo-box"><i class="fa-solid fa-dna"></i></div>
+                <h4>BioGenix</h4>
+                <p>Health & Biotech</p>
+                <span class="opp-count">18 Open Roles</span>
+            </div>
+            <div class="company-card">
+                <div class="company-logo-box"><i class="fa-solid fa-bolt"></i></div>
+                <h4>Volt Auto</h4>
+                <p>Electric Mobility</p>
+                <span class="opp-count">35 Open Roles</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="statistics" id="trends">
+        <div class="container stats-grid">
+            <div class="stat-item">
+                <h2>4.8M+</h2>
+                <p>Analyzed Postings</p>
+            </div>
+            <div class="stat-item">
+                <h2>12,500+</h2>
+                <p>Daily Live Updates</p>
+            </div>
+            <div class="stat-item">
+                <h2>93.4%</h2>
+                <p>Trend Match Accuracy</p>
+            </div>
+            <div class="stat-item">
+                <h2>1.2M+</h2>
+                <p>Job Seekers Guided</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer" id="about">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h3>JobInsight</h3>
+                <p>Leveraging continuous natural language processing and macro-economic data parsing to structure tomorrow's job metrics today.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>System Features</h4>
+                <ul>
+                    <li><a href="#">Trend Miner</a></li>
+                    <li><a href="#">Salary Predictor</a></li>
+                    <li><a href="#">Skill Gap Tracer</a></li>
+                    <li><a href="#">API Documentation</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Market Reports</a></li>
+                    <li><a href="#">White Papers</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Use</a></li>
+                </ul>
+            </div>
+            <div class="footer-links" id="contact">
+                <h4>Support Center</h4>
+                <ul>
+                    <li><a href="#">Help Desk</a></li>
+                    <li><a href="#">Contact Support</a></li>
+                    <li><a href="#">System Status</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 JobInsight. Built as an Intelligent Job Market Trend Mining System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+        const links = document.querySelectorAll('.nav-link');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenu.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        links.forEach(link => {
+            link.addEventListener('click', function() {
+                links.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                
+                if(navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    mobileMenu.querySelector('i').className = 'fa-solid fa-bars';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
