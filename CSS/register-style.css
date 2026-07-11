@@ -135,7 +135,26 @@ body {
     background-color: var(--white);
 }
 
-/* Left-align selected text slightly inside standard dropdown elements */
+/* Special tracking styles for phone wrapper containing static label prefix */
+.phone-field-container {
+    display: flex;
+    align-items: center;
+}
+
+.phone-field-container .country-prefix {
+    position: absolute;
+    left: 1rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    user-select: none;
+    z-index: 5;
+}
+
+.phone-field-container input {
+    padding-left: 4.2rem; /* Adjusted indentation layout to fit custom prefix badge neatly */
+}
+
 .input-field select {
     padding-left: 2.5rem;
     cursor: pointer;
@@ -164,6 +183,10 @@ body {
     color: var(--error);
 }
 
+.phone-field-container.invalid .country-prefix {
+    color: var(--error);
+}
+
 .error-msg {
     color: var(--error);
     font-size: 0.8rem;
@@ -185,7 +208,7 @@ body {
     transition: var(--transition);
     box-shadow: 0 4px 6px -1px rgba(2, 132, 199, 0.2);
     margin-top: 0.5rem;
-    margin-bottom: 1.5rem; /* Increased vertical layout depth space after registration button choice */
+    margin-bottom: 1.5rem;
 }
 
 .btn-register:hover {

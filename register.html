@@ -37,7 +37,7 @@
                     <label for="fullName">Full Name</label>
                     <div class="input-field">
                         <i class="fa-solid fa-user"></i>
-                        <input type="text" id="fullName" placeholder="John Doe" required>
+                        <input type="text" id="fullName" placeholder="Name" required>
                     </div>
                     <span class="error-msg" id="nameError"></span>
                 </div>
@@ -52,11 +52,11 @@
                     <span class="error-msg" id="emailError"></span>
                 </div>
 
-                <!-- Phone Number Field -->
+                <!-- Phone Number Field with +977 Country Prefix -->
                 <div class="input-group">
                     <label for="phone">Phone Number</label>
-                    <div class="input-field">
-                        <i class="fa-solid fa-phone"></i>
+                    <div class="input-field phone-field-container">
+                        <span class="country-prefix">+977</span>
                         <input type="text" id="phone" placeholder="10-digit mobile number" maxlength="10" required>
                     </div>
                     <span class="error-msg" id="phoneError"></span>
@@ -69,8 +69,8 @@
                         <i class="fa-solid fa-briefcase text-icon"></i>
                         <select id="userRole" required>
                             <option value="" disabled selected>Select your account role</option>
-                            <option value="seeker">Job Seeker</option>
-                            <option value="recruiter">Recruiter</option>
+                            <option value="user">User</option>
+                            <option value="admin">Admin</option>
                         </select>
                     </div>
                     <span class="error-msg" id="roleError"></span>
