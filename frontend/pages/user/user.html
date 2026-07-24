@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JobInSight | Job Market Trend Analysis Dashboard</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans (display/numbers) + Inter (UI/body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Mobile overlay (shown when sidebar is open on small screens) -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="app-shell">
+
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__brand">
+        <span class="brand-mark" aria-hidden="true">
+          <i class="fa-solid fa-diagram-project"></i>
+        </span>
+        <div class="brand-text">
+          <span class="brand-name">JobInSight</span>
+          <span class="brand-tagline">Market Intelligence</span>
+        </div>
+      </div>
+
+      <nav class="sidebar__nav" aria-label="Primary navigation">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="#dashboard" class="nav-link is-active" data-section="dashboard">
+              <i class="fa-solid fa-grip nav-icon"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#job-trends" class="nav-link" data-section="job-trends">
+              <i class="fa-solid fa-chart-line nav-icon"></i>
+              <span>Job Trends</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#trending-skills" class="nav-link" data-section="trending-skills">
+              <i class="fa-solid fa-bolt nav-icon"></i>
+              <span>Trending Skills</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#salary-analysis" class="nav-link" data-section="salary-analysis">
+              <i class="fa-solid fa-sack-dollar nav-icon"></i>
+              <span>Salary Analysis</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#job-categories" class="nav-link" data-section="job-categories">
+              <i class="fa-solid fa-layer-group nav-icon"></i>
+              <span>Job Categories</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#companies" class="nav-link" data-section="companies">
+              <i class="fa-solid fa-building nav-icon"></i>
+              <span>Companies</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#career-recommendations" class="nav-link" data-section="career-recommendations">
+              <i class="fa-solid fa-brain nav-icon"></i>
+              <span>Career Recommendations</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#reports" class="nav-link" data-section="reports">
+              <i class="fa-solid fa-file-lines nav-icon"></i>
+              <span>Reports</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#profile" class="nav-link" data-section="profile">
+              <i class="fa-solid fa-user nav-icon"></i>
+              <span>Profile</span>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="nav-list nav-list--footer">
+          <li class="nav-item">
+            <a href="#" class="nav-link nav-link--logout" id="logoutBtn">
+              <i class="fa-solid fa-arrow-right-from-bracket nav-icon"></i>
+              <span>Logout</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- ============ MAIN COLUMN ============ -->
+    <div class="main-column">
+
+      <!-- ============ TOP NAVBAR ============ -->
+      <header class="topbar">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div class="topbar__search">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="globalSearch" placeholder="Search job titles, skills, or companies…" autocomplete="off" />
+        </div>
+
+        <div class="topbar__actions">
+          <div class="notification-wrap">
+            <button class="icon-btn" id="notificationBtn" aria-label="Notifications">
+              <i class="fa-regular fa-bell"></i>
+              <span class="notif-dot"></span>
+            </button>
+
+            <div class="notification-dropdown" id="notificationDropdown">
+              <div class="notification-dropdown__header">
+                <span>Notifications</span>
+                <span class="notif-count">3 new</span>
+              </div>
+              <ul class="notification-list">
+                <li class="notification-item">
+                  <i class="fa-solid fa-chart-line notif-icon notif-icon--up"></i>
+                  <div>
+                    <p>Demand for <strong>Data Analysis</strong> rose 12% this week.</p>
+                    <span class="notif-time">2 hours ago</span>
+                  </div>
+                </li>
+                <li class="notification-item">
+                  <i class="fa-solid fa-building notif-icon notif-icon--info"></i>
+                  <div>
+                    <p><strong>TechNova Corp</strong> posted 24 new openings.</p>
+                    <span class="notif-time">5 hours ago</span>
+                  </div>
+                </li>
+                <li class="notification-item">
+                  <i class="fa-solid fa-file-circle-check notif-icon notif-icon--done"></i>
+                  <div>
+                    <p>Your <strong>Weekly Trend Report</strong> is ready to view.</p>
+                    <span class="notif-time">Yesterday</span>
+                  </div>
+                </li>
+              </ul>
+              <a href="#reports" class="notification-dropdown__footer">View all reports</a>
+            </div>
+          </div>
+
+          <div class="topbar__divider"></div>
+
+          <div class="user-chip">
+            <img src="https://i.pravatar.cc/80?img=12" alt="Profile picture of Sudip Karki" class="avatar" />
+            <div class="user-chip__info">
+              <span class="user-chip__name">Asim Kunwar</span>
+              <span class="user-chip__date" id="currentDate">—</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ============ SCROLLABLE CONTENT ============ -->
+      <main class="content">
+
+        <!-- ===================================================== -->
+        <!-- SECTION: DASHBOARD OVERVIEW (Stat cards + insights)   -->
+        <!-- ===================================================== -->
+        <section id="dashboard" class="page-section">
+          <div class="section-heading">
+            <div>
+              <h1>Dashboard Overview</h1>
+              <p class="section-subtitle">A snapshot of today's job market, mined from thousands of live listings.</p>
+            </div>
+          </div>
+
+          <!-- Top statistics cards -->
+          <div class="stat-grid">
+            <article class="stat-card">
+              <div class="stat-card__icon stat-card__icon--blue">
+                <i class="fa-solid fa-briefcase"></i>
+              </div>
+              <div class="stat-card__body">
+                <span class="stat-card__label">Total Jobs</span>
+                <span class="stat-card__value" data-count="24850">0</span>
+                <span class="stat-card__trend stat-card__trend--up">
+                  <i class="fa-solid fa-arrow-trend-up"></i> 8.2% this month
+                </span>
+              </div>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-card__icon stat-card__icon--teal">
+                <i class="fa-solid fa-building"></i>
+              </div>
+              <div class="stat-card__body">
+                <span class="stat-card__label">Companies</span>
+                <span class="stat-card__value" data-count="3120">0</span>
+                <span class="stat-card__trend stat-card__trend--up">
+                  <i class="fa-solid fa-arrow-trend-up"></i> 4.6% this month
+                </span>
+              </div>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-card__icon stat-card__icon--amber">
+                <i class="fa-solid fa-code"></i>
+              </div>
+              <div class="stat-card__body">
+                <span class="stat-card__label">Skills Tracked</span>
+                <span class="stat-card__value" data-count="742">0</span>
+                <span class="stat-card__trend stat-card__trend--up">
+                  <i class="fa-solid fa-arrow-trend-up"></i> 2.1% this month
+                </span>
+              </div>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-card__icon stat-card__icon--violet">
+                <i class="fa-solid fa-layer-group"></i>
+              </div>
+              <div class="stat-card__body">
+                <span class="stat-card__label">Job Categories</span>
+                <span class="stat-card__value" data-count="18">0</span>
+                <span class="stat-card__trend stat-card__trend--down">
+                  <i class="fa-solid fa-arrow-trend-down"></i> 0.4% this month
+                </span>
+              </div>
+            </article>
+          </div>
+
+          <!-- Secondary insight strip -->
+          <div class="insight-strip">
+            <div class="insight-chip">
+              <i class="fa-solid fa-fire insight-chip__icon"></i>
+              <div>
+                <span class="insight-chip__label">Most Demanded Skill</span>
+                <span class="insight-chip__value">Python</span>
+              </div>
+            </div>
+            <div class="insight-chip">
+              <i class="fa-solid fa-trophy insight-chip__icon"></i>
+              <div>
+                <span class="insight-chip__label">Top Hiring Company</span>
+                <span class="insight-chip__value">TechNova Corp</span>
+              </div>
+            </div>
+            <div class="insight-chip">
+              <i class="fa-solid fa-sack-dollar insight-chip__icon"></i>
+              <div>
+                <span class="insight-chip__label">Average Salary</span>
+                <span class="insight-chip__value">$92,400 /yr</span>
+              </div>
+            </div>
+            <div class="insight-chip">
+              <i class="fa-solid fa-location-dot insight-chip__icon"></i>
+              <div>
+                <span class="insight-chip__label">Top Hiring Location</span>
+                <span class="insight-chip__value">Bengaluru, IN</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================== -->
+        <!-- SECTION: LATEST JOB TRENDS                            -->
+        <!-- ===================================================== -->
+        <section id="job-trends" class="page-section">
+          <div class="section-heading">
+            <div>
+              <h2>Latest Job Trends</h2>
+              <p class="section-subtitle">Freshly mined listings from the past 24 hours.</p>
+            </div>
+            <a href="#" class="link-action">View all <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+
+          <div class="job-grid" id="jobGrid">
+            <!-- Job cards are duplicated here as static markup; script.js also uses this
+                 structure as a template for search filtering -->
+            <article class="job-card" data-search="senior data scientist technova corp bengaluru">
+              <div class="job-card__top">
+                <div class="job-card__logo" style="background:#e0e7ff; color:#4338ca;">TN</div>
+                <button class="job-card__bookmark" aria-label="Save job"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <h3 class="job-card__title">Senior Data Scientist</h3>
+              <p class="job-card__company">TechNova Corp</p>
+              <div class="job-card__meta">
+                <span><i class="fa-solid fa-location-dot"></i> Bengaluru, IN</span>
+                <span><i class="fa-solid fa-briefcase"></i> Full-time</span>
+              </div>
+              <div class="job-card__footer">
+                <span class="job-card__salary">$110K – $135K</span>
+                <span class="job-card__tag">New</span>
+              </div>
+            </article>
+
+            <article class="job-card" data-search="frontend engineer pixelforge kathmandu">
+              <div class="job-card__top">
+                <div class="job-card__logo" style="background:#dcfce7; color:#15803d;">PF</div>
+                <button class="job-card__bookmark" aria-label="Save job"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <h3 class="job-card__title">Frontend Engineer</h3>
+              <p class="job-card__company">PixelForge Labs</p>
+              <div class="job-card__meta">
+                <span><i class="fa-solid fa-location-dot"></i> Kathmandu, NP</span>
+                <span><i class="fa-solid fa-briefcase"></i> Full-time</span>
+              </div>
+              <div class="job-card__footer">
+                <span class="job-card__salary">$45K – $62K</span>
+                <span class="job-card__tag">New</span>
+              </div>
+            </article>
+
+            <article class="job-card" data-search="cloud security analyst nimbus systems remote">
+              <div class="job-card__top">
+                <div class="job-card__logo" style="background:#fef3c7; color:#b45309;">NS</div>
+                <button class="job-card__bookmark" aria-label="Save job"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <h3 class="job-card__title">Cloud Security Analyst</h3>
+              <p class="job-card__company">Nimbus Systems</p>
+              <div class="job-card__meta">
+                <span><i class="fa-solid fa-location-dot"></i> Remote</span>
+                <span><i class="fa-solid fa-briefcase"></i> Contract</span>
+              </div>
+              <div class="job-card__footer">
+                <span class="job-card__salary">$70K – $95K</span>
+                <span class="job-card__tag job-card__tag--muted">3 days ago</span>
+              </div>
+            </article>
+
+            <article class="job-card" data-search="machine learning engineer quantalytics austin">
+              <div class="job-card__top">
+                <div class="job-card__logo" style="background:#ede9fe; color:#6d28d9;">QA</div>
+                <button class="job-card__bookmark" aria-label="Save job"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <h3 class="job-card__title">Machine Learning Engineer</h3>
+              <p class="job-card__company">Quantalytics</p>
+              <div class="job-card__meta">
+                <span><i class="fa-solid fa-location-dot"></i> Austin, US</span>
+                <span><i class="fa-solid fa-briefcase"></i> Full-time</span>
+              </div>
+              <div class="job-card__footer">
+                <span class="job-card__salary">$120K – $150K</span>
+                <span class="job-card__tag">New</span>
+              </div>
+            </article>
+
+            <article class="job-card" data-search="network administrator gridline networks pune">
+              <div class="job-card__top">
+                <div class="job-card__logo" style="background:#dbeafe; color:#1d4ed8;">GN</div>
+                <button class="job-card__bookmark" aria-label="Save job"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <h3 class="job-card__title">Network Administrator</h3>
+              <p class="job-card__company">Gridline Networks</p>
+              <div class="job-card__meta">
+                <span><i class="fa-solid fa-location-dot"></i> Pune, IN</span>
+                <span><i class="fa-solid fa-briefcase"></i> Full-time</span>
+              </div>
+              <div class="job-card__footer">
+                <span class="job-card__salary">$38K – $52K</span>
+                <span class="job-card__tag job-card__tag--muted">5 days ago</span>
+              </div>
+            </article>
+
+            <article class="job-card" data-search="business intelligence analyst datapeak singapore">
+              <div class="job-card__top">
+                <div class="job-card__logo" style="background:#fce7f3; color:#be185d;">DP</div>
+                <button class="job-card__bookmark" aria-label="Save job"><i class="fa-regular fa-bookmark"></i></button>
+              </div>
+              <h3 class="job-card__title">Business Intelligence Analyst</h3>
+              <p class="job-card__company">DataPeak Analytics</p>
+              <div class="job-card__meta">
+                <span><i class="fa-solid fa-location-dot"></i> Singapore</span>
+                <span><i class="fa-solid fa-briefcase"></i> Full-time</span>
+              </div>
+              <div class="job-card__footer">
+                <span class="job-card__salary">$68K – $84K</span>
+                <span class="job-card__tag">New</span>
+              </div>
+            </article>
+          </div>
+
+          <p class="empty-state" id="jobEmptyState" hidden>No jobs match your search. Try a different keyword.</p>
+        </section>
+
+        <!-- ===================================================== -->
+        <!-- SECTION: TRENDING SKILLS                              -->
+        <!-- ===================================================== -->
+        <section id="trending-skills" class="page-section">
+          <div class="section-heading">
+            <div>
+              <h2>Trending Skills</h2>
+              <p class="section-subtitle">Extracted keywords ranked by frequency across all listings.</p>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="skill-badges">
+              <span class="skill-badge">Python</span>
+              <span class="skill-badge">Java</span>
+              <span class="skill-badge">Machine Learning</span>
+              <span class="skill-badge">SQL</span>
+              <span class="skill-badge">Power BI</span>
+              <span class="skill-badge">React</span>
+              <span class="skill-badge">Data Analysis</span>
+              <span class="skill-badge">AWS</span>
+              <span class="skill-badge">Docker</span>
+              <span class="skill-badge">Excel</span>
+            </div>
+
+            <hr class="panel-divider" />
+
+            <!-- Skill demand bars (placeholder for future Chart.js horizontal bar chart) -->
+            <div class="demand-list">
+              <div class="demand-row">
+                <span class="demand-row__label">Python</span>
+                <div class="demand-row__bar"><span style="width: 92%;"></span></div>
+                <span class="demand-row__value">92%</span>
+              </div>
+              <div class="demand-row">
+                <span class="demand-row__label">SQL</span>
+                <div class="demand-row__bar"><span style="width: 84%;"></span></div>
+                <span class="demand-row__value">84%</span>
+              </div>
+              <div class="demand-row">
+                <span class="demand-row__label">Machine Learning</span>
+                <div class="demand-row__bar"><span style="width: 77%;"></span></div>
+                <span class="demand-row__value">77%</span>
+              </div>
+              <div class="demand-row">
+                <span class="demand-row__label">Power BI</span>
+                <div class="demand-row__bar"><span style="width: 61%;"></span></div>
+                <span class="demand-row__value">61%</span>
+              </div>
+              <div class="demand-row">
+                <span class="demand-row__label">Java</span>
+                <div class="demand-row__bar"><span style="width: 55%;"></span></div>
+                <span class="demand-row__value">55%</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================== -->
+        <!-- SECTION: SALARY ANALYSIS                              -->
+        <!-- ===================================================== -->
+        <section id="salary-analysis" class="page-section">
+          <div class="section-heading">
+            <div>
+              <h2>Salary Analysis</h2>
+              <p class="section-subtitle">Average annual salary trend across the last 6 months (USD).</p>
+            </div>
+            <span class="chip chip--muted"><i class="fa-solid fa-chart-line"></i> Chart.js integration coming soon</span>
+          </div>
+
+          <div class="panel chart-panel">
+            <!-- Placeholder line chart built with pure SVG/CSS. Replace with Chart.js later. -->
+            <svg class="line-chart" viewBox="0 0 720 260" preserveAspectRatio="none" role="img" aria-label="Average salary trend over six months">
+              <!-- gridlines -->
+              <g class="line-chart__grid">
+                <line x1="0" y1="10" x2="720" y2="10"></line>
+                <line x1="0" y1="60" x2="720" y2="60"></line>
+                <line x1="0" y1="110" x2="720" y2="110"></line>
+                <line x1="0" y1="160" x2="720" y2="160"></line>
+                <line x1="0" y1="210" x2="720" y2="210"></line>
+              </g>
+
+              <!-- area fill -->
+              <path class="line-chart__area"
+                d="M0,180 L120,165 L240,150 L360,120 L480,95 L600,70 L720,55 L720,260 L0,260 Z"></path>
+
+              <!-- trend line -->
+              <path class="line-chart__line"
+                d="M0,180 L120,165 L240,150 L360,120 L480,95 L600,70 L720,55"></path>
+
+              <!-- data points -->
+              <circle class="line-chart__point" cx="0" cy="180" r="5"></circle>
+              <circle class="line-chart__point" cx="120" cy="165" r="5"></circle>
+              <circle class="line-chart__point" cx="240" cy="150" r="5"></circle>
+              <circle class="line-chart__point" cx="360" cy="120" r="5"></circle>
+              <circle class="line-chart__point" cx="480" cy="95" r="5"></circle>
+              <circle class="line-chart__point" cx="600" cy="70" r="5"></circle>
+              <circle class="line-chart__point" cx="720" cy="55" r="5"></circle>
+            </svg>
+
+            <div class="chart-axis">
+              <span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================== -->
+        <!-- SECTION: JOB CATEGORIES                               -->
+        <!-- ===================================================== -->
+        <section id="job-categories" class="page-section">
+          <div class="section-heading">
+            <div>
+              <h2>Job Categories</h2>
+              <p class="section-subtitle">Distribution of open roles by field.</p>
+            </div>
+          </div>
+
+          <div class="category-layout">
+            <div class="category-grid">
+              <article class="category-card">
+                <div class="category-card__icon" style="background:#dbeafe; color:#1d4ed8;">
+                  <i class="fa-solid fa-laptop-code"></i>
+                </div>
+                <h3>Software Development</h3>
+                <p>8,240 open roles</p>
+              </article>
+              <article class="category-card">
+                <div class="category-card__icon" style="background:#dcfce7; color:#15803d;">
+                  <i class="fa-solid fa-chart-simple"></i>
+                </div>
+                <h3>Data Science</h3>
+                <p>5,120 open roles</p>
+              </article>
+              <article class="category-card">
+                <div class="category-card__icon" style="background:#fef3c7; color:#b45309;">
+                  <i class="fa-solid fa-network-wired"></i>
+                </div>
+                <h3>Networking</h3>
+                <p>2,430 open roles</p>
+              </article>
+              <article class="category-card">
+                <div class="category-card__icon" style="background:#fee2e2; color:#b91c1c;">
+                  <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h3>Cyber Security</h3>
+                <p>3,015 open roles</p>
+              </article>
+              <article class="category-card">
+                <div class="category-card__icon" style="background:#ede9fe; color:#6d28d9;">
+                  <i class="fa-solid fa-cloud"></i>
+                </div>
+                <h3>Cloud Computing</h3>
+                <p>4,045 open roles</p>
+              </article>
+            </div>
+
+            <!-- Donut chart placeholder (pure CSS conic-gradient) -->
+            <div class="donut-panel">
+              <div class="donut-chart" style="--p1:38%; --p2:23%; --p3:11%; --p4:14%;">
+                <div class="donut-chart__hole">
+                  <span class="donut-chart__total">22.8K</span>
+                  <span class="donut-chart__label">Total Roles</span>
+                </div>
+              </div>
+              <ul class="donut-legend">
+                <li><span class="legend-dot" style="background:#2563eb;"></span> Software Dev · 38%</li>
+                <li><span class="legend-dot" style="background:#16a34a;"></span> Data Science · 23%</li>
+                <li><span class="legend-dot" style="background:#f59e0b;"></span> Cyber Security · 14%</li>
+                <li><span class="legend-dot" style="background:#ef4444;"></span> Networking · 11%</li>
+                <li><span class="legend-dot" style="background:#8b5cf6;"></span> Cloud & Others · 14%</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================== -->
+        <!-- SECTION: COMPANIES                                    -->
+        <!-- ===================================================== -->
+        <section id="companies" class="page-section">
+          <div class="section-heading">
+            <div>
+              <h2>Top Hiring Companies</h2>
+              <p class="section-subtitle">Ranked by number of active listings this month.</p>
+            </div>
+          </div>
+
+          <div class="company-grid">
+            <article class="company-card">
+              <div class="company-card__logo" style="background:#e0e7ff; color:#4338ca;">TN</div>
+              <h3>TechNova Corp</h3>
+              <p>142 open positions</p>
+              <span class="chip chip--soft">Software Development</span>
+            </article>
+            <article class="company-card">
+              <div class="company-card__logo" style="background:#fce7f3; color:#be185d;">DP</div>
+              <h3>DataPeak Analytics</h3>
+              <p>98 open positions</p>
+              <span class="chip chip--soft">Data Science</span>
+            </article>
+            <article class="company-card">
+              <div class="company-card__logo" style="background:#dbeafe; color:#1d4ed8;">GN</div>
+              <h3>Gridline Networks</h3>
+              <p>76 open positions</p>
+              <span class="chip chip--soft">Networking</span>
+            </article>
+            <article class="company-card">
+              <div class="company-card__logo" style="background:#fef3c7; color:#b45309;">NS</div>
+              <h3>Nimbus Systems</h3>
+              <p>64 open positions</p>
+              <span class="chip chip--soft">Cloud Computing</span>
+            </article>
+          </div>
+        </section>
+
+        <!-- ===================================================== -->
+        <!-- SECTION: CAREER RECOMMENDATIONS                       -->
+        <!-- ===================================================== -->
+        <section id="career-recommendations" class="page-section">
+          <div class="section-heading">
+            <div>
+              <h2>AI Career Recommendations</h2>
+              <p class="section-subtitle">Suggested roles based on your saved skill profile.</p>
+            </div>
+          </div>
+
+          <div class="recommend-grid">
+            <article class="recommend-card">
+              <div class="recommend-card__header">
+                <h3>Data Analyst</h3>
+                <span class="match-score match-score--high">91% match</span>
+              </div>
+              <p class="recommend-card__label">Required skills</p>
+              <div class="recommend-card__skills">
+                <span class="skill-badge skill-badge--sm">SQL</span>
+                <span class="skill-badge skill-badge--sm">Power BI</span>
+                <span class="skill-badge skill-badge--sm">Excel</span>
+                <span class="skill-badge skill-badge--sm">Python</span>
+              </div>
+              <button class="btn btn--primary btn--block">Apply Now</button>
+            </article>
+
+            <article class="recommend-card">
+              <div class="recommend-card__header">
+                <h3>Machine Learning Engineer</h3>
+                <span class="match-score match-score--medium">78% match</span>
+              </div>
+              <p class="recommend-card__label">Required skills</p>
+              <div class="recommend-card__skills">
+                <span class="skill-badge skill-badge--sm">Python</span>
+                <span class="skill-badge skill-badge--sm">Machine Learning</span>
+                <span class="skill-badge skill-badge--sm">TensorFlow</span>
+              </div>
+              <button class="btn btn--primary btn--block">Apply Now</button>
+            </article>
+
+            <article class="recommend-card">
+              <div class="recommend-card__header">
+                <h3>Cloud Security Engineer</h3>
+                <span class="match-score match-score--low">64% match</span>
+              </div>
+              <p class="recommend-card__label">Required skills</p>
+              <div class="recommend-card__skills">
+                <span class="skill-badge skill-badge--sm">AWS</span>
+                <span class="skill-badge skill-badge--sm">Networking</span>
+                <span class="skill-badge skill-badge--sm">Cyber Security</span>
+              </div>
+              <button class="btn btn--primary btn--block">Apply Now</button>
+            </article>
+          </div>
+        </section>
+
+        <!-- ===================================================== -->
+        <!-- SECTION: RECENT REPORTS                               -->
+        <!-- ===================================================== -->
+        <section id="reports" class="page-section">
+          <div class="section-heading">
+            <div>
+              <h2>Recent Analysis Reports</h2>
+              <p class="section-subtitle">Auto-generated summaries from the mining pipeline.</p>
+            </div>
+          </div>
+
+          <div class="panel table-panel">
+            <div class="table-scroll">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Report Name</th>
+                    <th>Generated Date</th>
+                    <th>Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <i class="fa-solid fa-file-lines table-file-icon"></i>
+                      Weekly Job Market Summary
+                    </td>
+                    <td>July 14, 2026</td>
+                    <td><span class="status-badge status-badge--done">Completed</span></td>
+                    <td><button class="btn btn--ghost btn--sm"><i class="fa-solid fa-download"></i> Download</button></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <i class="fa-solid fa-file-lines table-file-icon"></i>
+                      Skill Demand Forecast — Q3
+                    </td>
+                    <td>July 10, 2026</td>
+                    <td><span class="status-badge status-badge--done">Completed</span></td>
+                    <td><button class="btn btn--ghost btn--sm"><i class="fa-solid fa-download"></i> Download</button></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <i class="fa-solid fa-file-lines table-file-icon"></i>
+                      Salary Benchmark Report
+                    </td>
+                    <td>July 05, 2026</td>
+                    <td><span class="status-badge status-badge--pending">Processing</span></td>
+                    <td><button class="btn btn--ghost btn--sm" disabled><i class="fa-solid fa-download"></i> Download</button></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <i class="fa-solid fa-file-lines table-file-icon"></i>
+                      Regional Hiring Trends
+                    </td>
+                    <td>June 28, 2026</td>
+                    <td><span class="status-badge status-badge--done">Completed</span></td>
+                    <td><button class="btn btn--ghost btn--sm"><i class="fa-solid fa-download"></i> Download</button></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <i class="fa-solid fa-file-lines table-file-icon"></i>
+                      Company Growth Index
+                    </td>
+                    <td>June 20, 2026</td>
+                    <td><span class="status-badge status-badge--failed">Failed</span></td>
+                    <td><button class="btn btn--ghost btn--sm" disabled><i class="fa-solid fa-download"></i> Download</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================== -->
+        <!-- SECTION: PROFILE                                      -->
+        <!-- ===================================================== -->
+        <section id="profile" class="page-section">
+          <div class="section-heading">
+            <div>
+              <h2>Profile</h2>
+              <p class="section-subtitle">Your account and analysis preferences.</p>
+            </div>
+          </div>
+
+          <div class="panel profile-panel">
+            <img src="https://i.pravatar.cc/120?img=12" alt="Profile picture of Sudip Karki" class="profile-panel__avatar" />
+            <div class="profile-panel__info">
+              <h3>Sudip Karki</h3>
+              <p>Data Mining Researcher · JobInSight Team</p>
+              <div class="profile-panel__meta">
+                <span><i class="fa-solid fa-envelope"></i> sudip.karki@jobinsight.io</span>
+                <span><i class="fa-solid fa-location-dot"></i> Kathmandu, Nepal</span>
+              </div>
+            </div>
+            <button class="btn btn--outline">Edit Profile</button>
+          </div>
+        </section>
+
+        <!-- ============ FOOTER ============ -->
+        <footer class="footer">
+          <p>&copy; JobInSight 2026. All rights reserved.</p>
+        </footer>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

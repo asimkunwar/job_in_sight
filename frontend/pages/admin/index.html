@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel | JobInSight</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <link rel="stylesheet" href="../user_dashboard/style.css">
+<link rel="stylesheet" href="./admin/admin.css">
+</head>
+<body>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="app-shell">
+
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__brand">
+        <span class="brand-mark" aria-hidden="true"><i class="fa-solid fa-diagram-project"></i></span>
+        <div class="brand-text">
+          <span class="brand-name">JobInSight</span>
+          <span class="brand-badge">Admin Panel</span>
+        </div>
+      </div>
+
+      <nav class="sidebar__nav" aria-label="Admin navigation">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="#dashboard" class="nav-link is-active" data-section="dashboard">
+              <i class="fa-solid fa-grip nav-icon"></i><span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#manage-jobs" class="nav-link" data-section="manage-jobs">
+              <i class="fa-solid fa-briefcase nav-icon"></i><span>Manage Jobs</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#manage-companies" class="nav-link" data-section="manage-companies">
+              <i class="fa-solid fa-building nav-icon"></i><span>Manage Companies</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#manage-users" class="nav-link" data-section="manage-users">
+              <i class="fa-solid fa-users nav-icon"></i><span>Manage Users</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#skills-categories" class="nav-link" data-section="skills-categories">
+              <i class="fa-solid fa-layer-group nav-icon"></i><span>Skills &amp; Categories</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#mining-control" class="nav-link" data-section="mining-control">
+              <i class="fa-solid fa-server nav-icon"></i><span>Mining Control</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#reports" class="nav-link" data-section="reports">
+              <i class="fa-solid fa-file-lines nav-icon"></i><span>Reports</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#settings" class="nav-link" data-section="settings">
+              <i class="fa-solid fa-gear nav-icon"></i><span>Settings</span>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="nav-list nav-list--footer">
+          <li class="nav-item">
+            <a href="#" class="nav-link nav-link--logout" id="logoutBtn">
+              <i class="fa-solid fa-arrow-right-from-bracket nav-icon"></i><span>Logout</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- ============ MAIN COLUMN ============ -->
+    <div class="main-column">
+
+      <!-- ============ TOP NAVBAR ============ -->
+      <header class="topbar">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div class="topbar__search">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" placeholder="Search anything in the admin panel…" autocomplete="off" />
+        </div>
+
+        <div class="topbar__actions">
+          <div class="notification-wrap">
+            <button class="icon-btn" id="notificationBtn" aria-label="Notifications">
+              <i class="fa-regular fa-bell"></i>
+              <span class="notif-dot"></span>
+            </button>
+
+            <div class="notification-dropdown" id="notificationDropdown">
+              <div class="notification-dropdown__header">
+                <span>Notifications</span>
+                <span class="notif-count">4 new</span>
+              </div>
+              <ul class="notification-list">
+                <li class="notification-item">
+                  <i class="fa-solid fa-user-plus notif-icon notif-icon--info"></i>
+                  <div>
+                    <p>14 new users registered today.</p>
+                    <span class="notif-time">1 hour ago</span>
+                  </div>
+                </li>
+                <li class="notification-item">
+                  <i class="fa-solid fa-triangle-exclamation notif-icon" style="background:var(--color-warning-bg); color:var(--color-warning);"></i>
+                  <div>
+                    <p><strong>Glassdoor</strong> scraper failed on last run.</p>
+                    <span class="notif-time">3 hours ago</span>
+                  </div>
+                </li>
+                <li class="notification-item">
+                  <i class="fa-solid fa-briefcase notif-icon notif-icon--up"></i>
+                  <div>
+                    <p>32 job posts pending approval.</p>
+                    <span class="notif-time">6 hours ago</span>
+                  </div>
+                </li>
+                <li class="notification-item">
+                  <i class="fa-solid fa-file-circle-check notif-icon notif-icon--done"></i>
+                  <div>
+                    <p>Monthly analytics report generated.</p>
+                    <span class="notif-time">Yesterday</span>
+                  </div>
+                </li>
+              </ul>
+              <a href="#reports" class="notification-dropdown__footer">View all reports</a>
+            </div>
+          </div>
+
+          <div class="topbar__divider"></div>
+
+          <div class="user-chip">
+            <img src="https://i.pravatar.cc/80?img=32" alt="Profile picture of admin" class="avatar" />
+            <div class="user-chip__info">
+              <span class="user-chip__name">Admin · Anish Shrestha</span>
+              <span class="user-chip__date" id="currentDate">—</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ============ SCROLLABLE CONTENT ============ -->
+      <main class="content">
+
+        <!-- ===================================================== -->
+        <!-- SECTION: DASHBOARD OVERVIEW                           -->
+        <!-- ===================================================== -->
+        <section id="dashboard" class="page-section">
+          <div class="section-heading">
+            <div>
+              <h1>Admin Overview</h1>
+              <p class="section-subtitle">System-wide status across users, listings, and the mining pipeline.</p>
+            </div>
+          </div>
+
+          <div class="stat-grid">
+            <article class="stat-card">
+              <div class="stat-card__icon stat-card__icon--blue"><i class="fa-solid fa-users"></i></div>
+              <div class="stat-card__body">
+                <span class="stat-card__label">Total Users</span>
+                <span class="stat-card__value" data-count="8624">0</span>
+                <span class="stat-card__trend stat-card__trend--up"><i class="fa-solid fa-arrow-trend-up"></i> 5.4% this month</span>
+              </div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-card__icon stat-card__icon--teal"><i class="fa-solid fa-briefcase"></i></div>
+              <div class="stat-card__body">
+                <span class="stat-card__label">Jobs Listed</span>
+                <span class="stat-card__value" data-count="24850">0</span>
+                <span class="stat-card__trend stat-card__trend--up"><i class="fa-solid fa-arrow-trend-up"></i> 8.2% this month</span>
+              </div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-card__icon stat-card__icon--amber"><i class="fa-solid fa-hourglass-half"></i></div>
+              <div class="stat-card__body">
+                <span class="stat-card__label">Pending Approvals</span>
+                <span class="stat-card__value" data-count="32">0</span>
+                <span class="stat-card__trend stat-card__trend--down"><i class="fa-solid fa-arrow-trend-down"></i> 3 fewer than yesterday</span>
+              </div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-card__icon stat-card__icon--violet"><i class="fa-solid fa-server"></i></div>
+              <div class="stat-card__body">
+                <span class="stat-card__label">Active Scrapers</span>
+                <span class="stat-card__value" data-count="3">0</span>
+                <span class="stat-card__trend stat-card__trend--up"><i class="fa-solid fa-circle-check"></i> All systems normal</span>
+              </div>
+            </article>
+          </div>
+
+          <div class="insight-strip">
+            <div class="insight-chip">
+              <i class="fa-solid fa-user-plus insight-chip__icon"></i>
+              <div><span class="insight-chip__label">New Signups Today</span><span class="insight-chip__value">47</span></div>
+            </div>
+            <div class="insight-chip">
+              <i class="fa-solid fa-file-circle-check insight-chip__icon"></i>
+              <div><span class="insight-chip__label">Reports Generated</span><span class="insight-chip__value">128 total</span></div>
+            </div>
+            <div class="insight-chip">
+              <i class="fa-solid fa-heart-pulse insight-chip__icon"></i>
+              <div><span class="insight-chip__label">System Uptime</span><span class="insight-chip__value">99.98%</span></div>
+            </div>
+            <div class="insight-chip">
+              <i class="fa-solid fa-clock-rotate-left insight-chip__icon"></i>
+              <div><span class="insight-chip__label">Last Scrape Run</span><span class="insight-chip__value">18 min ago</span></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================== -->
+        <!-- SECTION: MANAGE JOBS                                  -->
+        <!-- ===================================================== -->
+        <section id="manage-jobs" class="page-section">
+          <div class="section-heading">
+            <div>
+              <h2>Manage Jobs</h2>
+              <p class="section-subtitle">Review, approve, or remove mined job listings.</p>
+            </div>
+            <button class="btn btn--primary"><i class="fa-solid fa-plus"></i> Add Job</button>
+          </div>
+
+          <div class="panel table-panel">
+            <div style="padding: 20px 24px 0;">
+              <div class="filter-bar">
+                <div class="filter-bar__search">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <input type="text" id="jobSearch" placeholder="Search by job title or company…" />
+                </div>
+                <select class="filter-select" data-filter-target="jobTableBody">
+                  <option value="all">All statuses</option>
+                  <option value="approved">Approved</option>
+                  <option value="pending">Pending</option>
+                  <option value="rejected">Rejected</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-scroll">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Job</th>
+                    <th>Category</th>
+                    <th>Posted</th>
+                    <th>Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="jobTableBody">
+                  <tr data-status="approved" data-search="senior data scientist technova corp">
+                    <td>
+                      <div class="cell-identity">
+                        <div class="cell-identity__logo" style="background:#e0e7ff; color:#4338ca;">TN</div>
+                        <div>
+                          <div class="cell-identity__name">Senior Data Scientist</div>
+                          <div class="cell-identity__sub">TechNova Corp</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>Data Science</td>
+                    <td>Jul 14, 2026</td>
+                    <td><span class="status-badge status-badge--done">Approved</span></td>
+                    <td>
+                      <div class="row-actions">
+                        <button class="action-icon-btn" aria-label="Edit"><i class="fa-solid fa-pen"></i></button>
+                        <button class="action-icon-btn action-icon-btn--danger" aria-label="Delete"><i class="fa-solid fa-trash"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-status="pending" data-search="frontend engineer pixelforge labs">
+                    <td>
+                      <div class="cell-identity">
+                        <div class="cell-identity__logo" style="background:#dcfce7; color:#15803d;">PF</div>
+                        <div>
+                          <div class="cell-identity__name">Frontend Engineer</div>
+                          <div class="cell-identity__sub">PixelForge Labs</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>Software Development</td>
+                    <td>Jul 16, 2026</td>
+                    <td><span class="status-badge status-badge--pending">Pending</span></td>
+                    <td>
+                      <div class="row-actions">
+                        <button class="action-icon-btn action-icon-btn--approve" aria-label="Approve"><i class="fa-solid fa-check"></i></button>
+                        <button class="action-icon-btn action-icon-btn--danger" aria-label="Reject"><i class="fa-solid fa-xmark"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-status="pending" data-search="cloud security analyst nimbus systems">
+                    <td>
+                      <div class="cell-identity">
+                        <div class="cell-identity__logo" style="background:#fef3c7; color:#b45309;">NS</div>
+                        <div>
+                          <div class="cell-identity__name">Cloud Security Analyst</div>
+                          <div class="cell-identity__sub">Nimbus Systems</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>Cyber Security</td>
+                    <td>Jul 15, 2026</td>
+                    <td><span class="status-badge status-badge--pending">Pending</span></td>
+                    <td>
+                      <div class="row-actions">
+                        <button class="action-icon-btn action-icon-btn--approve" aria-label="Approve"><i class="fa-solid fa-check"></i></button>
+                        <button class="action-icon-btn action-icon-btn--danger" aria-label="Reject"><i class="fa-solid fa-xmark"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-status="rejected" data-search="junior php developer webcraft">
+                    <td>
+                      <div class="cell-identity">
+                        <div class="cell-identity__logo" style="background:#fee2e2; color:#b91c1c;">WC</div>
+                        <div>
+                          <div class="cell-identity__name">Junior PHP Developer</div>
+                          <div class="cell-identity__sub">WebCraft Studio</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>Software Development</td>
+                    <td>Jul 11, 2026</td>
+                    <td><span class="status-badge status-badge--failed">Rejected</span></td>
+                    <td>
+                      <div class="row-actions">
+                        <button class="action-icon-btn" aria-label="Edit"><i class="fa-solid fa-pen"></i></button>
+                        <button class="action-icon-btn action-icon-btn--danger" aria-label="Delete"><i class="fa-solid fa-trash"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-status="approved" data-search="machine learning engineer quantalytics">
+                    <td>
+                      <div class="cell-identity">
+                        <div class="cell-identity__logo" style="background:#ede9fe; color:#6d28d9;">QA</div>
+                        <div>
+                          <div class="cell-identity__name">Machine Learning Engineer</div>
+                          <div class="cell-identity__sub">Quantalytics</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>Data Science</td>
+                    <td>Jul 09, 2026</td>
+                    <td><span class="status-badge status-badge--done">Approved</span></td>
+                    <td>
+                      <div class="row-actions">
+                        <button class="action-icon-btn" aria-label="Edit"><i class="fa-solid fa-pen"></i></button>
+                        <button class="action-icon-btn action-icon-btn--danger" aria-label="Delete"><i class="fa-solid fa-trash"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="pagination">
+              <span>Showing 5 of 24,850 jobs</span>
+              <div class="pagination__pages">
+                <button class="is-active">1</button>
+                <button>2</button>
+                <button>3</button>
+                <button><i class="fa-solid fa-chevron-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================== -->
+        <!-- SECTION: MANAGE COMPANIES                             -->
+        <!-- ===================================================== -->
+        <section id="manage-companies" class="page-section">
+          <div class="section-heading">
+            <div>
+              <h2>Manage Companies</h2>
+              <p class="section-subtitle">Verify company profiles mined from job listings.</p>
+            </div>
+            <button class="btn btn--primary"><i class="fa-solid fa-plus"></i> Add Company</button>
+          </div>
+
+          <div class="panel table-panel">
+            <div style="padding: 20px 24px 0;">
+              <div class="filter-bar">
+                <div class="filter-bar__search">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <input type="text" id="companySearch" placeholder="Search companies…" />
+                </div>
+                <select class="filter-select" data-filter-target="companyTableBody">
+                  <option value="all">All statuses</option>
+                  <option value="verified">Verified</option>
+                  <option value="unverified">Unverified</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-scroll">
+              <table class="data-table">
+                <thead>
+                  <tr><th>Company</th><th>Industry</th><th>Open Jobs</th><th>Status</th><th></th></tr>
+                </thead>
+                <tbody id="companyTableBody">
+                  <tr data-status="verified" data-search="technova corp software">
+                    <td>
+                      <div class="cell-identity">
+                        <div class="cell-identity__logo" style="background:#e0e7ff; color:#4338ca;">TN</div>
+                        <div class="cell-identity__name">TechNova Corp</div>
+                      </div>
+                    </td>
+                    <td>Software Development</td>
+                    <td>142</td>
+                    <td><span class="status-badge status-badge--done">Verified</span></td>
+                    <td>
+                      <div class="row-actions">
+                        <button class="action-icon-btn" aria-label="Edit"><i class="fa-solid fa-pen"></i></button>
+                        <button class="action-icon-btn action-icon-btn--danger" aria-label="Delete"><i class="fa-solid fa-trash"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-status="verified" data-search="datapeak analytics data science">
+                    <td>
+                      <div class="cell-identity">
+                        <div class="cell-identity__logo" style="background:#fce7f3; color:#be185d;">DP</div>
+                        <div class="cell-identity__name">DataPeak Analytics</div>
+                      </div>
+                    </td>
+                    <td>Data Science</td>
+                    <td>98</td>
+                    <td><span class="status-badge status-badge--done">Verified</span></td>
+                    <td>
+                      <div class="row-actions">
+                        <button class="action-icon-btn" aria-label="Edit"><i class="fa-solid fa-pen"></i></button>
+                        <button class="action-icon-btn action-icon-btn--danger" aria-label="Delete"><i class="fa-solid fa-trash"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-status="unverified" data-search="gridline networks networking">
+                    <td>
+                      <div class="cell-identity">
+                        <div class="cell-identity__logo" style="background:#dbeafe; color:#1d4ed8;">GN</div>
+                        <div class="cell-identity__name">Gridline Networks</div>
+                      </div>
+                    </td>
+                    <td>Networking</td>
+                    <td>76</td>
+                    <td><span class="status-badge status-badge--pending">Unverified</span></td>
+                    <td>
+                      <div class="row-actions">
+                        <button class="action-icon-btn action-icon-btn--approve" aria-label="Verify"><i class="fa-solid fa-check"></i></button>
+                        <button class="action-icon-btn action-icon-btn--danger" aria-label="Delete"><i class="fa-solid fa-trash"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-status="verified" data-search="nimbus systems cloud computing">
+                    <td>
+                      <div class="cell-identity">
+                        <div class="cell-identity__logo" style="background:#fef3c7; color:#b45309;">NS</div>
+                        <div class="cell-identity__name">Nimbus Systems</div>
+                      </div>
+                    </td>
+                    <td>Cloud Computing</td>
+                    <td>64</td>
+                    <td><span class="status-badge status-badge--done">Verified</span></td>
+                    <td>
+                      <div class="row-actions">
+                        <button class="action-icon-btn" aria-label="Edit"><i class="fa-solid fa-pen"></i></button>
+                        <button class="action-icon-btn action-icon-btn--danger" aria-label="Delete"><i class="fa-solid fa-trash"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================== -->
+        <!-- SECTION: MANAGE USERS                                 -->
+        <!-- ===================================================== -->
+        <section id="manage-users" class="page-section">
+          <div class="section-heading">
+            <div>
+              <h2>Manage Users</h2>
+              <p class="section-subtitle">All registered job seekers and administrators.</p>
+            </div>
+            <button class="btn btn--primary"><i class="fa-solid fa-user-plus"></i> Add User</button>
+          </div>
+
+          <div class="panel table-panel">
+            <div style="padding: 20px 24px 0;">
+              <div class="filter-bar">
+                <div class="filter-bar__search">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <input type="text" id="userSearch" placeholder="Search by name or email…" />
+                </div>
+                <select class="filter-select" data-filter-target="userTableBody">
+                  <option value="all">All statuses</option>
+                  <option value="active">Active</option>
+                  <option value="suspended">Suspended</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-scroll">
+              <table class="data-table">
+                <thead>
+                  <tr><th>User</th><th>Role</th><th>Joined</th><th>Status</th><th></th></tr>
+                </thead>
+                <tbody id="userTableBody">
+                  <tr data-status="active" data-search="sudip karki sudip.karki@jobinsight.io">
+                    <td>
+                      <div class="cell-identity">
+                        <img src="https://i.pravatar.cc/72?img=12" alt="" class="cell-identity__avatar" />
+                        <div>
+                          <div class="cell-identity__name">Sudip Karki</div>
+                          <div class="cell-identity__sub">sudip.karki@jobinsight.io</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="role-pill">User</span></td>
+                    <td>Jan 12, 2026</td>
+                    <td><span class="status-badge status-badge--done">Active</span></td>
+                    <td>
+                      <div class="row-actions">
+                        <button class="action-icon-btn" aria-label="Edit"><i class="fa-solid fa-pen"></i></button>
+                        <button class="action-icon-btn action-icon-btn--danger" aria-label="Suspend"><i class="fa-solid fa-ban"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-status="active" data-search="anish shrestha anish.shrestha@jobinsight.io">
+                    <td>
+                      <div class="cell-identity">
+                        <img src="https://i.pravatar.cc/72?img=32" alt="" class="cell-identity__avatar" />
+                        <div>
+                          <div class="cell-identity__name">Anish Shrestha</div>
+                          <div class="cell-identity__sub">anish.shrestha@jobinsight.io</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="role-pill role-pill--admin">Admin</span></td>
+                    <td>Nov 02, 2025</td>
+                    <td><span class="status-badge status-badge--done">Active</span></td>
+                    <td>
+                      <div class="row-actions">
+                        <button class="action-icon-btn" aria-label="Edit"><i class="fa-solid fa-pen"></i></button>
+                        <button class="action-icon-btn action-icon-btn--danger" aria-label="Suspend"><i class="fa-solid fa-ban"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-status="suspended" data-search="priya thapa priya.thapa@example.com">
+                    <td>
+                      <div class="cell-identity">
+                        <img src="https://i.pravatar.cc/72?img=47" alt="" class="cell-identity__avatar" />
+                        <div>
+                          <div class="cell-identity__name">Priya Thapa</div>
+                          <div class="cell-identity__sub">priya.thapa@example.com</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="role-pill">User</span></td>
+                    <td>Mar 28, 2026</td>
+                    <td><span class="status-badge status-badge--failed">Suspended</span></td>
+                    <td>
+                      <div class="row-actions">
+                        <button class="action-icon-btn action-icon-btn--approve" aria-label="Reactivate"><i class="fa-solid fa-rotate-left"></i></button>
+                        <button class="action-icon-btn action-icon-btn--danger" aria-label="Delete"><i class="fa-solid fa-trash"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-status="active" data-search="ramesh gurung ramesh.gurung@example.com">
+                    <td>
+                      <div class="cell-identity">
+                        <img src="https://i.pravatar.cc/72?img=51" alt="" class="cell-identity__avatar" />
+                        <div>
+                          <div class="cell-identity__name">Ramesh Gurung</div>
+                          <div class="cell-identity__sub">ramesh.gurung@example.com</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="role-pill">User</span></td>
+                    <td>Jun 30, 2026</td>
+                    <td><span class="status-badge status-badge--done">Active</span></td>
+                    <td>
+                      <div class="row-actions">
+                        <button class="action-icon-btn" aria-label="Edit"><i class="fa-solid fa-pen"></i></button>
+                        <button class="action-icon-btn action-icon-btn--danger" aria-label="Suspend"><i class="fa-solid fa-ban"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="pagination">
+              <span>Showing 4 of 8,624 users</span>
+              <div class="pagination__pages">
+                <button class="is-active">1</button>
+                <button>2</button>
+                <button>3</button>
+                <button><i class="fa-solid fa-chevron-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================== -->
+        <!-- SECTION: SKILLS & CATEGORIES                          -->
+        <!-- ===================================================== -->
+        <section id="skills-categories" class="page-section">
+          <div class="section-heading">
+            <div>
+              <h2>Skills &amp; Categories</h2>
+              <p class="section-subtitle">Manage the taxonomy used to classify mined listings.</p>
+            </div>
+          </div>
+
+          <div class="manage-grid">
+            <div class="panel">
+              <h3 style="font-size:15px; margin-bottom:16px;">Tracked Skills</h3>
+              <div class="tag-input-row">
+                <input type="text" id="newSkillInput" placeholder="Add a new skill, e.g. Kubernetes" />
+                <button class="btn btn--primary" id="addSkillBtn"><i class="fa-solid fa-plus"></i> Add</button>
+              </div>
+              <div class="manage-tag-list" id="skillTagList">
+                <span class="manage-tag">Python <button type="button" aria-label="Remove Python"><i class="fa-solid fa-xmark"></i></button></span>
+                <span class="manage-tag">Java <button type="button" aria-label="Remove Java"><i class="fa-solid fa-xmark"></i></button></span>
+                <span class="manage-tag">Machine Learning <button type="button" aria-label="Remove Machine Learning"><i class="fa-solid fa-xmark"></i></button></span>
+                <span class="manage-tag">SQL <button type="button" aria-label="Remove SQL"><i class="fa-solid fa-xmark"></i></button></span>
+                <span class="manage-tag">Power BI <button type="button" aria-label="Remove Power BI"><i class="fa-solid fa-xmark"></i></button></span>
+                <span class="manage-tag">React <button type="button" aria-label="Remove React"><i class="fa-solid fa-xmark"></i></button></span>
+                <span class="manage-tag">Data Analysis <button type="button" aria-label="Remove Data Analysis"><i class="fa-solid fa-xmark"></i></button></span>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3 style="font-size:15px; margin-bottom:16px;">Job Categories</h3>
+              <div class="category-row-list">
+                <div class="category-row">
+                  <span class="category-row__name">Software Development</span>
+                  <span class="category-row__count">8,240 jobs</span>
+                </div>
+                <div class="category-row">
+                  <span class="category-row__name">Data Science</span>
+                  <span class="category-row__count">5,120 jobs</span>
+                </div>
+                <div class="category-row">
+                  <span class="category-row__name">Networking</span>
+                  <span class="category-row__count">2,430 jobs</span>
+                </div>
+                <div class="category-row">
+                  <span class="category-row__name">Cyber Security</span>
+                  <span class="category-row__count">3,015 jobs</span>
+                </div>
+                <div class="category-row">
+                  <span class="category-row__name">Cloud Computing</span>
+                  <span class="category-row__count">4,045 jobs</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================== -->
+        <!-- SECTION: DATA MINING CONTROL                          -->
+        <!-- ===================================================== -->
+        <section id="mining-control" class="page-section">
+          <div class="section-heading">
+            <div>
+              <h2>Data Mining Control</h2>
+              <p class="section-subtitle">Monitor and trigger scraping jobs across job board sources.</p>
+            </div>
+          </div>
+
+          <div class="source-grid">
+            <div class="source-card">
+              <div class="source-card__top">
+                <span class="source-card__name"><i class="fa-brands fa-linkedin"></i> LinkedIn Jobs</span>
+                <span><span class="status-dot status-dot--running"></span><span class="source-card__status-text">Running</span></span>
+              </div>
+              <p class="source-card__meta">Last run: <strong>18 min ago</strong> · Next: <strong>in 42 min</strong></p>
+              <button class="btn btn--outline btn--sm source-card__run" style="width:100%;"><i class="fa-solid fa-play"></i> Run Now</button>
+            </div>
+
+            <div class="source-card">
+              <div class="source-card__top">
+                <span class="source-card__name"><i class="fa-solid fa-briefcase"></i> Indeed</span>
+                <span><span class="status-dot status-dot--idle"></span><span class="source-card__status-text">Idle</span></span>
+              </div>
+              <p class="source-card__meta">Last run: <strong>2 hours ago</strong> · Next: <strong>in 4 hours</strong></p>
+              <button class="btn btn--outline btn--sm source-card__run" style="width:100%;"><i class="fa-solid fa-play"></i> Run Now</button>
+            </div>
+
+            <div class="source-card">
+              <div class="source-card__top">
+                <span class="source-card__name"><i class="fa-solid fa-building-columns"></i> Glassdoor</span>
+                <span><span class="status-dot status-dot--idle"></span><span class="source-card__status-text">Idle</span></span>
+              </div>
+              <p class="source-card__meta">Last run: <strong>Failed, 3 hrs ago</strong> · Next: <strong>manual only</strong></p>
+              <button class="btn btn--outline btn--sm source-card__run" style="width:100%;"><i class="fa-solid fa-play"></i> Run Now</button>
+            </div>
+          </div>
+
+          <div class="panel" style="padding:20px;">
+            <h3 style="font-size:14px; margin-bottom:14px; color:var(--color-text-secondary);">Pipeline Log</h3>
+            <div class="log-console" id="logConsole">
+              <div class="log-console__line"><span class="log-console__time">[09:12:04]</span> <span class="log-console__tag--ok">LinkedIn Jobs scrape completed — 214 new listings ingested.</span></div>
+              <div class="log-console__line"><span class="log-console__time">[08:47:31]</span> <span class="log-console__tag--warn">Glassdoor scraper timed out after 3 retries.</span></div>
+              <div class="log-console__line"><span class="log-console__time">[08:02:10]</span> <span class="log-console__tag--info">Indeed scrape queued for next scheduled run.</span></div>
+              <div class="log-console__line"><span class="log-console__time">[07:30:55]</span> <span class="log-console__tag--ok">Skill extraction model reprocessed 1,204 listings.</span></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================== -->
+        <!-- SECTION: REPORTS                                      -->
+        <!-- ===================================================== -->
+        <section id="reports" class="page-section">
+          <div class="section-heading">
+            <div>
+              <h2>Reports</h2>
+              <p class="section-subtitle">Generated summaries from the mining and analytics pipeline.</p>
+            </div>
+            <button class="btn btn--primary"><i class="fa-solid fa-plus"></i> Generate Report</button>
+          </div>
+
+          <div class="panel table-panel">
+            <div class="table-scroll">
+              <table class="data-table">
+                <thead>
+                  <tr><th>Report Name</th><th>Generated Date</th><th>Status</th><th></th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><i class="fa-solid fa-file-lines table-file-icon"></i>Weekly Job Market Summary</td>
+                    <td>July 14, 2026</td>
+                    <td><span class="status-badge status-badge--done">Completed</span></td>
+                    <td><button class="btn btn--ghost btn--sm"><i class="fa-solid fa-download"></i> Download</button></td>
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-file-lines table-file-icon"></i>Skill Demand Forecast — Q3</td>
+                    <td>July 10, 2026</td>
+                    <td><span class="status-badge status-badge--done">Completed</span></td>
+                    <td><button class="btn btn--ghost btn--sm"><i class="fa-solid fa-download"></i> Download</button></td>
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-file-lines table-file-icon"></i>Salary Benchmark Report</td>
+                    <td>July 05, 2026</td>
+                    <td><span class="status-badge status-badge--pending">Processing</span></td>
+                    <td><button class="btn btn--ghost btn--sm" disabled><i class="fa-solid fa-download"></i> Download</button></td>
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-file-lines table-file-icon"></i>User Growth Report</td>
+                    <td>June 30, 2026</td>
+                    <td><span class="status-badge status-badge--done">Completed</span></td>
+                    <td><button class="btn btn--ghost btn--sm"><i class="fa-solid fa-download"></i> Download</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================== -->
+        <!-- SECTION: SETTINGS                                     -->
+        <!-- ===================================================== -->
+        <section id="settings" class="page-section">
+          <div class="section-heading">
+            <div>
+              <h2>Settings</h2>
+              <p class="section-subtitle">Platform configuration and notification preferences.</p>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="save-banner" id="settingsBanner"><i class="fa-solid fa-circle-check"></i> <span>Settings saved.</span></div>
+
+            <form id="settingsForm">
+              <div class="settings-form">
+                <div class="form-field">
+                  <label for="siteName">Platform Name</label>
+                  <input type="text" id="siteName" value="JobInSight" />
+                </div>
+                <div class="form-field">
+                  <label for="adminEmail">Admin Contact Email</label>
+                  <input type="email" id="adminEmail" value="admin@jobinsight.io" />
+                </div>
+
+                <div class="form-field form-field--full">
+                  <label>Notification Preferences</label>
+
+                  <div class="toggle-row">
+                    <div>
+                      <div class="toggle-row__label">Email me on new user signups</div>
+                      <div class="toggle-row__desc">Get notified whenever someone creates an account.</div>
+                    </div>
+                    <label class="toggle-switch">
+                      <input type="checkbox" checked />
+                      <span class="toggle-switch__track"></span>
+                    </label>
+                  </div>
+
+                  <div class="toggle-row">
+                    <div>
+                      <div class="toggle-row__label">Alert on scraper failure</div>
+                      <div class="toggle-row__desc">Send an alert if any data source fails to run.</div>
+                    </div>
+                    <label class="toggle-switch">
+                      <input type="checkbox" checked />
+                      <span class="toggle-switch__track"></span>
+                    </label>
+                  </div>
+
+                  <div class="toggle-row">
+                    <div>
+                      <div class="toggle-row__label">Weekly digest email</div>
+                      <div class="toggle-row__desc">Summary of platform activity every Monday.</div>
+                    </div>
+                    <label class="toggle-switch">
+                      <input type="checkbox" />
+                      <span class="toggle-switch__track"></span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="settings-actions">
+                  <button type="button" class="btn btn--outline">Cancel</button>
+                  <button type="submit" class="btn btn--primary">Save Changes</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- ============ FOOTER ============ -->
+        <footer class="footer">
+          <p>&copy; JobInSight 2026. All rights reserved. — Admin Panel</p>
+        </footer>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

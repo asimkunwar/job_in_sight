@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Account | JobInSight</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <link rel="stylesheet" href="auth.css" />
+</head>
+<body>
+
+  <div class="auth-page">
+
+    <!-- ============ LEFT: BRAND / VISUAL PANEL ============ -->
+    <aside class="auth-visual">
+      <div class="auth-visual__grid" aria-hidden="true"></div>
+      <div class="auth-visual__glow" aria-hidden="true"></div>
+
+      <div class="auth-visual__brand">
+        <span class="brand-mark"><i class="fa-solid fa-diagram-project"></i></span>
+        <span>JobInSight</span>
+      </div>
+
+      <div class="auth-visual__body">
+        <h1>Your career, backed by data.</h1>
+        <p>Create a free account to save searches, track trending skills in your field, and get AI-matched career recommendations as the market shifts.</p>
+      </div>
+
+      <div class="auth-visual__stats">
+        <div>
+          <strong>18</strong>
+          <span>Job categories</span>
+        </div>
+        <div>
+          <strong>92%</strong>
+          <span>Match accuracy</span>
+        </div>
+        <div>
+          <strong>Daily</strong>
+          <span>Trend updates</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ============ RIGHT: REGISTER FORM ============ -->
+    <div class="auth-form-side">
+      <div class="auth-card">
+
+        <div class="auth-card__mobile-brand">
+          <span class="brand-mark"><i class="fa-solid fa-diagram-project"></i></span>
+          <span>JobInSight</span>
+        </div>
+
+        <p class="auth-card__eyebrow">Get started</p>
+        <h2>Create your account</h2>
+        <p class="auth-card__subtitle">Free to join. No credit card required.</p>
+
+        <div id="registerBanner" class="form-banner" role="status"></div>
+
+        <form id="registerForm" novalidate>
+
+          <div class="form-group">
+            <label for="registerName">Full name</label>
+            <div class="input-wrap">
+              <i class="fa-regular fa-user leading-icon"></i>
+              <input type="text" id="registerName" placeholder="Sudip Karki" autocomplete="name" />
+            </div>
+            <span class="field-error" id="registerNameError"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="registerEmail">Email address</label>
+            <div class="input-wrap">
+              <i class="fa-regular fa-envelope leading-icon"></i>
+              <input type="email" id="registerEmail" placeholder="you@example.com" autocomplete="email" />
+            </div>
+            <span class="field-error" id="registerEmailError"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="registerPassword">Password</label>
+            <div class="input-wrap">
+              <i class="fa-solid fa-lock leading-icon"></i>
+              <input type="password" id="registerPassword" placeholder="Create a password" autocomplete="new-password" />
+              <button type="button" class="password-toggle" data-target="registerPassword" aria-label="Show password">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+            <div class="strength-meter" aria-hidden="true">
+              <span class="strength-meter__bar"></span>
+              <span class="strength-meter__bar"></span>
+              <span class="strength-meter__bar"></span>
+              <span class="strength-meter__bar"></span>
+            </div>
+            <span class="strength-label" id="strengthLabel"></span>
+            <span class="field-error" id="registerPasswordError"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="registerConfirm">Confirm password</label>
+            <div class="input-wrap">
+              <i class="fa-solid fa-lock leading-icon"></i>
+              <input type="password" id="registerConfirm" placeholder="Re-enter your password" autocomplete="new-password" />
+              <button type="button" class="password-toggle" data-target="registerConfirm" aria-label="Show password">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+            <span class="field-error" id="registerConfirmError"></span>
+          </div>
+
+          <div class="auth-card__terms">
+            <input type="checkbox" id="registerTerms" />
+            <label for="registerTerms">
+              I agree to JobInSight's <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+              <span class="field-error" id="registerTermsError">Please accept the terms to continue.</span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn--primary" id="registerSubmit">
+            Create Account <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </form>
+
+        <div class="auth-divider">or</div>
+
+        <p class="auth-footer-link">
+          Already have an account? <a href="login.html">Sign in</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+</body>
+</html>
